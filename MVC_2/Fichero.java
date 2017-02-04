@@ -14,42 +14,38 @@ public class Fichero {
 			FileInputStream fileInput = new FileInputStream(nombre);
 			DataInputStream bufferedInput = new DataInputStream(fileInput);
 			String dato;
+			StringBuilder sb = new StringBuilder();
+
 			while(bufferedInput.available() > 0)
 			{
-				personas = new Persona[cantidad + 1];
-
 				dato = new String(bufferedInput.readUTF());
-				persona.setNombre(dato);
-//System.out.print(persona.getNombre() + "\n");
-				//persona.setNombre("1");
-//System.out.print(dato + "\n");
-				dato = new String(bufferedInput.readUTF());
-				persona.setApellidos(dato);
-				//persona.setApellidos("2");
-//System.out.print(dato + "\n");
-				dato = new String(bufferedInput.readUTF());
-				persona.setDireccion(dato);
-				//persona.setDireccion("3");
-//System.out.print(dato + "\n");
-				//dato = bufferedInput.readUTF();
-				dato = new String(bufferedInput.readUTF());
-				persona.setFechaNac(dato);
-				//persona.setFechaNac("4");
-//System.out.print(dato + "\n");
-
-				if(personas.length == 1)
-					personas[0] = persona;
-				else
-					personas[personas.length - 1] = persona;
-				cantidad++;
+				sb.append(dato).append("\n");
 			}
 			bufferedInput.close();
+
+			String fileAsString = sb.toString();
+			//System.out.println("Contents : " + fileAsString);
+			String[] temp = sb.toString().split("\n");
+
+			cantidad = temp.length/4;
+			personas = new Persona[cantidad];
+
+			int indice = 0;
+			for(int i = 0; i < personas.length; i++)
+			{
+				persona.setNombre(temp[indice]);
+				persona.setApellidos(temp[indice + 1]);
+				persona.setDireccion(temp[indice + 2]);
+				persona.setFechaNac(temp[indice + 3]);
+				personas[i] = persona;
+				indice = indice + 4;
+			}
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-//System.out.print(personas.length + "\n");
+
 		return personas;
 	}
 

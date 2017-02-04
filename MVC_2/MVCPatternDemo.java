@@ -39,7 +39,6 @@ public class MVCPatternDemo {
       for(int i = 0; i < modelos.length; i++)
       {
          System.out.print("Persona numero: " + (i + 1) + "\n");
-         //fetch student record based on his roll no from the database
          Persona model = crearPersona();
          modelos[i] = model;
          System.out.print("\n");
@@ -48,8 +47,6 @@ public class MVCPatternDemo {
 
    public void VisualizarModelos()
    {
-System.out.print(modelos.length + "\n");
-System.out.print(modelos[0].getNombre().length() + "\n");
       // Visualizamos los resultados
       for(int i = 0; i < modelos.length; i++)
       {
@@ -93,10 +90,7 @@ System.out.print(modelos[0].getNombre().length() + "\n");
    public void CargarFichero(String nombreFich)
    {
       Fichero fichero = new Fichero();
-//      modelos = new Persona[fichero.LeerFichero(nombreFich).length];
-      Persona[] personas = fichero.LeerFichero(nombreFich);
-      modelos = personas.clone();
-//      modelos = fichero.LeerFichero(nombreFich);
+      modelos = fichero.LeerFichero(nombreFich);
    }
 
    public void GrabarFichero(String nombreFich)
@@ -111,14 +105,6 @@ System.out.print(modelos[0].getNombre().length() + "\n");
       String nombreFich = "info.dat";
       Scanner teclado = new Scanner(System.in);
       int valor;
-
-      //mvc.iniciar();
-
-      //mvc.CrearModelos();
-
-      //mvc.VisualizarModelos();
-
-      //mvc.GrabarFichero(nombreFich);
 
       do{
          System.out.print("Elija una opcion entre 1 y 6\n");
